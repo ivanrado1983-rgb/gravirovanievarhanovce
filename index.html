@@ -3,104 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mária Ivanová - Gravírovanie Varhaňovce</title>
-    <!-- Knižnica pre ikony sociálnych sietí -->
+    <title>Mária Ivanová - Laserové gravírovanie z preglejky</title>
+    <!-- Ikony pre sociálne siete -->
     <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Príprava pre Favicon ikonku -->
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
-         :root {
+        :root {
             --primary: #1a252f;
             --accent: #3498db;
+            --accent-glow: #00d2ff;
             --bg-light: #f8f9fa;
             --text-dark: #2c3e50;
             --text-light: #ffffff;
+            --card-bg: #ffffff;
             --border: #e2e8f0;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; padding: 0; }
-        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        header { background-color: var(--primary); display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: sticky; top: 0; z-index: 1000; }
-        header h2 { color: var(--text-light); text-transform: uppercase; font-size: 1.2rem; letter-spacing: 1px; }
-        .social-links a { font-size: 1.5rem; margin-left: 15px; text-decoration: none; transition: 0.3s; }
-        .fa-facebook { color: #1877f2; } .fa-instagram { color: #e1306c; }
-        .social-links a:hover { filter: brightness(1.2); }
-        .hero-sekcia { background: linear-gradient(rgba(26, 37, 47, 0.95), rgba(44, 62, 80, 0.95)); color: var(--text-light); padding: 50px 20px; text-align: center; }
-        .hero-sekcia h1 { font-size: 2.3rem; margin-bottom: 15px; text-transform: uppercase; }
-        .hero-sekcia p { max-width: 700px; margin: 0 auto; color: #bdc3c7; }
-        .obsah-pad { padding: 40px 20px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; margin: 30px 0; }
-        .product-card { background: white; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); display: flex; flex-direction: column; text-align: left; }
-        .product-img { width: 100%; height: 220px; object-fit: cover; background: #eaeaea; }
-        .product-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-        .product-title { font-size: 1.15rem; color: var(--primary); margin-bottom: 6px; }
-        .product-desc { font-size: 0.88rem; color: #7f8c8d; margin-bottom: 12px; flex-grow: 1; }
-        .product-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .product-price { font-size: 1.2rem; font-weight: bold; color: var(--primary); }
-        .order-btn { background: var(--accent); color: white; padding: 6px 14px; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
-        .order-btn:hover { background: #2980b9; }
-        .contact-box { background: #ecf0f1; padding: 35px; border-radius: 8px; margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .contact-info h3, .contact-form h3 { color: var(--primary); margin-bottom: 15px; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; margin-bottom: 4px; font-size: 0.88rem; font-weight: 500; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.95rem; }
-        .submit-btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1rem; transition: 0.3s; }
-        .submit-btn:hover { background: #2c3e50; }
-        @media (max-width: 768px) { .contact-box { grid-template-columns: 1fr; } .hero-sekcia h1 { font-size: 1.8rem; } }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigácia */
+        header {
+            background-color: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-light);
+        }
+
+        .social-link {
+            font-size: 1.3rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link .fab { color: #bdc3c7; }
+        .social-link:hover .fa-facebook { color: #1877f2; }
+        .social-link:hover .fa-instagram { color: #e1306c; }
+
+        /* Úvod a Príbeh */
+        .hero {
+            background: linear-gradient(rgba(26, 37, 47, 0.95), rgba(44, 62, 80, 0.95));
+            color: var(--text-light);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .story-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .story-box h2 {
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+            font-size: 0.95rem;
+        }
+
+        .spec-item i {
+            color: var(--accent-glow);
+            margin-right: 8px;
+        }
+
+        /* Katalóg produktov */
+        .catalog {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #e74c3c;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background-color: #eaeaea;
+        }
+
+        .product-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        .product-desc {
+            font-size: 0.88rem;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .order-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .order-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Kontakt a Formulár */
+        .contact-section {
+            background: #ecf0f1;
+            padding: 50px 20px;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-info-box {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .contact-info-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .info-link {
+            display: flex;
+            align-items: center;
+            color: #bdc3c7;
+            text-decoration: none;
+            margin-bottom: 15px;
+        }
+
+        .info-link i {
+            margin-right: 12px;
+            color: var(--accent);
+            width: 20px;
+        }
+
+        .billing-details {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.88rem;
+            color: #95a5a6;
+        }
+
+        .billing-details p { margin-bottom: 5px; }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .form-box h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.88rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Pätička */
+        footer {
+            background: #11181f;
+            color: #7f8c8d;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .footer-socials {
+            margin-bottom: 10px;
+        }
+
+        .footer-socials a {
+            color: #7f8c8d;
+            margin: 0 10px;
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
+        
+        .footer-socials a:hover .fa-facebook { color: #1877f2; }
+        .footer-socials a:hover .fa-instagram { color: #e1306c; }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; text-align: center; }
+            nav ul { margin-top: 12px; }
+            nav ul li { margin: 5px 8px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h2>Mária Ivanová</h2>
-            <div class="social-links">
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-        </header>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-area">
+                <img src="logo.png" alt="Mária Ivanová" class="logo-img" onerror="this.style.display='none'; document.getElementById('fallback-text').style.display='block';">
+                <span id="fallback-text" class="logo-text" style="display:none;">Mária Ivanová</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#produkty">Výrobky</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+                    <li><a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <section>
+    <section class="hero">
+        <div class="hero-content">
             <h1>Výrobky z preglejky na mieru</h1>
-            <p>Gravírovaniu a vyrezávaniu sa venujeme už takmer rok. Vyrábame originálne erby, plakety a trofeje pre športové kluby a DHZ na laseri LONGER (do 42x43 cm) z 3mm a 4mm topoľovej preglejky.</p>
-        </section>
-
-        <section style="margin-top: 30px;">
-            <h2>Kategória: Trofeje</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="https://placeholder.com" alt="Trofej" class="product-img">
-                    <h3 style="margin: 10px 0 5px 0;">Športová trofej - Futbal</h3>
-                    <p style="font-size: 0.9rem; color: #7f8c8d;">Vyrezávaná trofej pre športové kluby s textom na prianie z pevnej preglejky.</p>
-                    <p style="font-size: 1.2rem; font-weight: bold; margin-top: 10px;">18.50 €</p>
-                    <a href="#kontakt" class="order-btn">Mám záujem</a>
+            <p>Precízna práca, osobný prístup a unikátny dizajn pre každú príležitosť.</p>
+            
+            <div class="story-box">
+                <h2><i class="fas fa-tools"></i> Náš príbeh & Remeslo</h2>
+                <p>Gravírovaniu a vyrezávaniu sa venujeme už takmer rok. Za tento čas sme získali úspechy vo výrobe plakiet, erbov a trofejí pre športové kluby a DHZ. Výroba spočíva na diódovom laserovom gravírovacom stroji LONGER, pričom maximálna veľkosť rezania alebo gravírovania je 42x43cm. Vyrezávame a gravírujeme do topoľovej preglejky o hrúbke 3mm alebo 4mm.</p>
+                <div class="specs-grid">
+                    <div class="spec-item"><i class="fas fa-bolt"></i><strong>Technológia:</strong> Laser LONGER</div>
+                    <div class="spec-item"><i class="fas fa-expand-arrows-alt"></i><strong>Max. rozmer:</strong> 42 x 43 cm</div>
+                    <div class="spec-item"><i class="fas fa-tree"></i><strong>Materiál:</strong> Topoľ (3-4mm)</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="contact-box" id="kontakt">
-            <h3>Kontaktné & Fakturačné údaje</h3>
-            <p><strong>Sídlo:</strong> Varhaňovce č. 55, 082 05 Š. Bohdanovce</p>
-            <p><strong>Tel:</strong> 0918 / 910 589, 0917 / 376 401</p>
-            <p><strong>E-mail:</strong> autodiely.maziva@gmail.com</p>
-            <p style="font-size: 0.85rem; color: #7f8c8d; margin-top: 5px;">IČO: 54358370 | DIČ: 1120799735</p>
+    <section class="catalog" id="produkty">
+        <h2 class="section-title">Naša tvorba</h2>
+        <div class="products-grid">
+ <!-- Produkt 1 -->
+            <div class="product-card">
+                <span class="badge">Najpredávanejšie</span>
+                <img src="plaketa1.jpg" alt="Plaketa" class="product-img" onerror="this.src='https://placeholder.com'">
+                <div class="product-info">
+                    <h4 class="product-title">Hasičská pamätná plaketa</h4>
+                    <p class="product-desc">Detailne vygravírovaný erb obce alebo zboru do topoľovej preglejky. Vyberte si požadovanú veľkosť:</p>
+                    <div class="form-group" style="margin: 10px 0;">
+                        <select class="velkost-select" onchange="zmenCenu(this)">
+                            <option value="15.00" data-rozmer="A5 (15x21 cm)">Rozmer: A5 (15x21 cm) — 15.00 €</option>
+                            <option value="25.00" data-rozmer="A4 (21x30 cm)" selected>Rozmer: A4 (21x30 cm) — 25.00 €</option>
+                            <option value="39.00" data-rozmer="A3 (30x42 cm)">Rozmer: A3 (30x42 cm) — 39.00 €</option>
+                        </select>
+                    </div>
+                    <div class="product-meta">
+                        <span class="product-price"><span class="aktualna-cena">25.00</span> €</span>
+                        <a href="#kontakt" class="order-btn" onclick="nastavFormularPreVyrobok(this)">Mám záujem</a>
+                    </div>
+                </div>
+            </div>
 
-            <h3 style="margin-top: 25px; margin-bottom: 10px;">Máte záujem o výrobok?</h3>
-            <form action="https://formspree.io" method="POST">
-                <div class="form-group">
-                    <label>Vaše meno / Názov klubu</label>
-                    <input type="text" name="meno" required>
+            <!-- Produkt 2 -->
+            <div class="product-card">
+                <span class="badge">Novinka</span>
+                <img src="https://placeholder.com" alt="Trofej" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Športová trofej - Futbal</h4>
+                    <p class="product-desc">Vyrezávaná trofej pre športové kluby s textom na prianie. Vyrobené z pevnej vrstvenej preglejky.</p>
+                    <div class="product-meta">
+                        <span class="product-price">18.50 €</span>
+                        <a href="#kontakt" class="order-btn" onclick="nastavFormularPreVyrobokSimple('Športová trofej - Futbal', '18.50 €')">Mám záujem</a>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Váš E-mail</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Podrobnosti k objednávke</label>
-                    <textarea name="sprava" rows="4" required placeholder="Sem napíšte, o akú trofej alebo produkt máte záujem..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Odoslať nezáväzný dopyt</button>
-            </form>
-        </section>
-    </div>
+            </div>
 
+            <!-- Produkt 3 -->
+            <div class="product-card">
+                <img src="https://placeholder.com" alt="Ozdoba" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Ozdobné predmety</h4>
+                    <p class="product-desc">Jemné, laserom vyrezávané svadobné či vianočné ozdoby s gravírovanými menami členov rodiny. Hrúbka 3mm.</p>
+                    <div class="product-meta">
+                        <span class="product-price">2.50 €</span>
+                        <a href="#kontakt" class="order-btn" onclick="nastavFormularPreVyrobokSimple('Ozdobné predmety', '2.50 €')">Mám záujem</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produkt 4 -->
+            <div class="product-card">
+                <span class="badge">Tip na darček</span>
+                <img src="https://placeholder.com" alt="Cedula" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Cedula otváracia doba</h4>
+                    <p class="product-desc">Gravírovaná drevená tabuľa s otváracími hodinami na bránu alebo prevádzku z odolnej topoľovej preglejky.</p>
+                    <div class="product-meta">
+                        <span class="product-price">14.90 €</span>
+                        <a href="#kontakt" class="order-btn" onclick="nastavFormularPreVyrobokSimple('Cedula otváracia doba', '14.90 €')">Mám záujem</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="kontakt">
+        <div class="contact-container">
+            <div class="contact-info-box">
+                <h3>Kontaktné údaje</h3>
+                <div class="info-link"><i class="fas fa-user"></i>Mária Ivanová</div>
+                <div class="info-link"><i class="fas fa-map-marker-alt"></i>Varhaňovce č. 55, 082 05 Š. Bohdanovce</div>
+                <a href="tel:0918910589" class="info-link"><i class="fas fa-phone-alt"></i>0918 / 910 589</a>
+                <a href="tel:0917376401" class="info-link"><i class="fas fa-phone-alt"></i>0917 / 376 401</a>
+                <a href="mailto:autodiely.maziva@gmail.com" class="info-link"><i class="fas fa-envelope"></i>autodiely.maziva@gmail.com</a>
+                <div class="billing-details">
+                    <p><strong>Fakturačné údaje:</strong></p>
+                    <p>IČO: 54358370</p>
+                    <p>DIČ: 1120799735</p>
+                </div>
+            </div>
+
+            <div class="form-box">
+                <h3>Máte záujem o výrobok?</h3>
+                <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 15px;">Napíšte nám vaše predstavy na gravírovanie a my sa vám ozveme s cenovou ponukou.</p>
+                <form action="https://formspree.io" method="POST">
+                    <div class="form-group">
+                        <label>Vaše meno / Názov klubu</label>
+                        <input type="text" name="meno" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Váš E-mail</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Podrobnosti k objednávke</label>
+                        <textarea id="form-msg" name="sprava" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Odoslať nezáväzný dopyt</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mária Ivanová - Všetky práva vyhradené.</p>
+    </footer>
+
+    <script>
+        function zmenCenu(selectElement) {
+            const novaCena = parseFloat(selectElement.value).toFixed(2);
+            const karta = selectElement.closest('.product-card');
+            karta.querySelector('.aktualna-cena').innerText = novaCena;
+        }
+        function nastavFormularPreVyrobok(tlacitko) {
+            const karta = tlacitko.closest('.product-card');
+            const nazovProduktu = karta.querySelector('.product-title').innerText;
+            const selectVelkost = karta.querySelector('.velkost-select');
+            const vybranaCena = parseFloat(selectVelkost.value).toFixed(2);
+            const vybranyRozmer = selectVelkost.options[selectVelkost.selectedIndex].getAttribute('data-rozmer');
+            const formularSprava = document.getElementById('form-msg');
+            if (formularSprava) {
+                formularSprava.value = `Dobrý deň,\nmám záujem o produkt: "${nazovProduktu}"\nPožadovaný rozmer: ${vybranyRozmer}\nOrientačná cena: ${vybranaCena} €\n\nMoja predstava o nápise je: `;
+                formularSprava.focus();
+            }
+        }
+        function nastavFormularPreVyrobokSimple(nazov, cena) {
+            const formularSprava = document.getElementById('form-msg');
+            if (formularSprava) {
+                formularSprava.value = `Dobrý deň,\nmám záujem o produkt: "${nazov}"\nCena: ${cena}\n\nMoja predstava o nápise je: `;
+                formularSprava.focus();
+            }
+        }
+    </script>
 </body>
 </html>
